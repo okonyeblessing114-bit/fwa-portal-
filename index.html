@@ -1,161 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FWA Portal - Farmers Welfare Association</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>FWA - Fruitful Wisdom Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{
-background: linear-gradient(135deg, #0a7a2e 0%, #1eb954 50%, #ffde59 100%);
-background-attachment:fixed;
-min-height:100vh;
-position:relative;
-overflow-x:hidden;
-}
-body::before{
-content:"🌿🍃🌿";
-position:fixed;
-font-size:80px;
-opacity:0.15;
-top:0;left:0;right:0;bottom:0;
-pointer-events:none;
-line-height:120px;
-word-spacing:40px;
-}
-.container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:2}
-.header{
-background:rgba(255,255,255,0.95);
-border-radius:20px;
-padding:20px;
-text-align:center;
-box-shadow:0 8px 32px rgba(0,0,0,0.2);
-border:3px solid #0a7a2e;
-margin-bottom:20px;
-}
-.header h1{color:#0a7a2e;font-size:28px;font-weight:900}
-.header h1 span{color:#d4a000}
-.header p{color:#333;margin-top:5px;font-weight:600}
-.session-badge{
-display:inline-block;
-background:linear-gradient(90deg,#0a7a2e,#ffde59);
-color:white;
-padding:6px 18px;
-border-radius:20px;
-font-weight:800;
-margin-top:10px;
-}
-.card{
-background:rgba(255,255,255,0.96);
-border-radius:18px;
-padding:22px;
-margin-bottom:18px;
-box-shadow:0 6px 20px rgba(0,0,0,0.15);
-border-left:6px solid #0a7a2e;
-}
-.card h2{color:#0a7a2e;margin-bottom:12px;font-size:20px}
-input,select{
-width:100%;
-padding:13px;
-border:2px solid #0a7a2e;
-border-radius:10px;
-margin:8px 0;
-font-size:16px;
-outline:none;
-}
-input:focus,select:focus{border-color:#ffde59}
-.btn{
-width:100%;
-background:linear-gradient(90deg,#0a7a2e,#1eb954);
-color:white;
-border:none;
-padding:14px;
-border-radius:12px;
-font-size:17px;
-font-weight:800;
-cursor:pointer;
-margin-top:10px;
-}
-.btn-yellow{
-background:linear-gradient(90deg,#ffde59,#d4a000);
-color:#0a3a0a;
-}
-.teacher-box{
-background:#f0fff4;
-border:2px dashed #0a7a2e;
-border-radius:12px;
-padding:12px;
-margin-top:10px;
-}
-.leaf{font-size:22px}
-.footer{text-align:center;color:white;font-weight:700;margin-top:15px;text-shadow:0 2px 4px rgba(0,0,0,0.5)}
-</style>
-</head>
-<body>
-<div class="container">
-<div class="header">
-<h1>🌿 FWA <span>PORTAL</span> 🌿</h1>
-<p>Farmers & Welfare Association - Rivers State</p>
-<div class="session-badge">📚 Session: 2024/2025</div>
-<p style="margin-top:8px;color:#0a7a2e">🍃 Green Leaf Edition 🍃</p>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 50%, #0a6a2e 0%, #1a8a3d 20%, #7ab800 55%, #ffde59 85%, #ffc800 100%);padding:20px}
+.card{background:#fff;width:100%;max-width:430px;border-radius:28px;padding:28px 26px 22px;box-shadow:0 20px 60px rgba(0,0,0,0.25);text-align:center;z-index:2}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:14px}
+.logo{width:72px;height:72px;background:#0a5a2a;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;border:4px solid #fff;box-shadow:0 0 0 3px #0a5a2a}
+.brand{text-align:left}.brand h1{font-size:22px;color:#0a4a2a;line-height:1.1;font-weight:900}
+.brand .motto{color:#2e8b57;font-style:italic;font-size:13px;font-weight:700}.brand .addr{font-size:10.5px;color:#444;margin-top:3px}
+.divider{height:1px;background:#eee;margin:18px 0 14px}
+.card h2{font-size:26px;color:#0a3d22;font-weight:800}.sub{font-size:13px;color:#555;margin:6px 0 18px}
+.login-btn{width:100%;display:flex;align-items:center;gap:14px;border:1.8px solid;border-radius:14px;padding:12px 14px;margin-bottom:12px;text-align:left;cursor:pointer;background:#fafaf9}
+.admin{border-color:#f4b0b0}.teacher{border-color:#c4b5fd}.parent{border-color:#a7e3c1}
+.login-btn .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.login-btn b{display:block;font-size:15px}.login-btn span{display:block;font-size:11px;color:#555}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99;align-items:center;justify-content:center;padding:16px}.modal.active{display:flex}
+.modal-box{background:#fff;width:100%;max-width:420px;border-radius:22px;padding:24px}
+.input{width:100%;padding:12px 14px;border:1.6px solid #ddd;border-radius:10px;margin:8px 0 12px;font-size:14px}
+.btn{width:100%;padding:13px;background:#0a6a2e;color:#fff;border:none;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;margin-top:6px}.btn2{background:#eee;color:#333}
+.small{font-size:12px;color:#666;margin-top:10px}.err{background:#fde2e2;color:#b91c1c;padding:8px 10px;border-radius:8px;font-size:12px;margin-bottom:10px;display:none}
+.dash{display:none;position:fixed;inset:0;background:#f6f7f6;z-index:100;overflow:auto;padding:18px}.dash.active{display:block}
+.top{background:#fff;padding:14px 16px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.06);margin-bottom:14px}
+.badge{background:#dcfce7;color:#166534;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05)}.table th,.table td{padding:10px 8px;border-bottom:1px solid #eee;text-align:left}.table th{background:#0a5a2a;color:#fff;font-size:11px}
+</style></head><body>
+<div class="card"><div class="logo-wrap"><div class="logo">FWA</div><div class="brand"><h1>FRUITFUL WISDOM<br>ACADEMY</h1><div class="motto">Go for Wisdom</div><div class="addr">No 1 Job Street Rumuapu Rukpokwu PH</div></div></div>
+<div class="divider"></div><h2>Login to Portal</h2><p class="sub" id="status">Loading Excel Template...</p>
+<div class="login-btn admin" onclick="openModal('adminM')"><div class="icon">🛡️</div><div><b>ADMIN LOGIN</b><span>admin / FWA-Admin-2026!</span></div></div>
+<div class="login-btn teacher" onclick="openModal('teacherM')"><div class="icon">🎓</div><div><b>TEACHER LOGIN</b><span>15 Teachers + PIN</span></div></div>
+<div class="login-btn parent" onclick="openModal('parentM')"><div class="icon">👨‍👧‍👦</div><div><b>PARENT LOGIN</b><span>Student ID + Password</span></div></div>
+<div class="small">✅ Reads FRUITFUL_WISDOM_ACADEMY_PORTAL_TEMPLATE.xlsx live</div>
 </div>
-
-<div class="card">
-<h2>🔐 Student Login</h2>
-<input type="text" id="regNo" placeholder="Enter Registration Number">
-<input type="password" id="password" placeholder="Enter Password">
-<select id="session">
-<option value="2024/2025" selected>2024/2025 - Current Session</option>
-<option value="2023/2024">2023/2024</option>
-</select>
-<button class="btn" onclick="login()">Login to Portal 🌿</button>
-<button class="btn btn-yellow" onclick="checkResult()">Check Result</button>
-</div>
-
-<div class="card">
-<h2>👨‍🏫 Teacher / Admin Quick Access</h2>
-<p style="color:#555">Teacher list now loads FAST - Fixed!</p>
-<div class="teacher-box" id="teacherList">
-<span class="leaf">🌿</span> Loading teachers...
-</div>
-<button class="btn" onclick="loadTeachers()">Load Teachers Now</button>
-</div>
-
-<div class="card">
-<h2>📢 Notice Board</h2>
-<p>✅ Portal updated to GREEN LEAF design</p>
-<p>✅ Subject year issue FIXED - Now shows 2024/2025</p>
-<p>✅ Teacher loading FIXED - No more delay</p>
-<p>🌿 Welcome to new session!</p>
-</div>
-
-<div class="footer">
-<p>© 2024/2025 FWA Portal • Powered by Green Leaf 🍃</p>
-<p>🌿🌿🌿</p>
-</div>
-</div>
-
+<div class="modal" id="adminM"><div class="modal-box"><h3>Admin Login</h3><div class="err" id="adminErr"></div><input id="adminUser" class="input" placeholder="Username"><input id="adminPass" class="input" type="password" placeholder="Password"><button class="btn" onclick="loginAdmin()">Login</button><button class="btn btn2" onclick="closeModal('adminM')">Cancel</button></div></div>
+<div class="modal" id="teacherM"><div class="modal-box"><h3>Teacher Login</h3><div class="err" id="teacherErr"></div><select id="teacherName" class="input"></select><input id="teacherPin" class="input" type="password" placeholder="Login PIN"><button class="btn" onclick="loginTeacher()">Login</button><button class="btn btn2" onclick="closeModal('teacherM')">Cancel</button></div></div>
+<div class="modal" id="parentM"><div class="modal-box"><h3>Parent Login</h3><div class="err" id="parentErr"></div><input id="parentId" class="input" placeholder="Student ID e.g. FWA-B05-001"><input id="parentPass" class="input" type="password" placeholder="Parent Password"><button class="btn" onclick="loginParent()">View Result</button><button class="btn btn2" onclick="closeModal('parentM')">Cancel</button><div class="small">Test: FWA-B05-001 / 7TEH83QO</div></div></div>
+<div class="dash" id="adminDash"><div class="top"><b>Admin Dashboard</b><button class="btn" style="width:auto;padding:8px 14px" onclick="logout()">Logout</button></div><div id="adminContent"></div></div>
+<div class="dash" id="teacherDash"><div class="top"><b id="teacherTitle">Teacher</b><button class="btn" style="width:auto;padding:8px 14px" onclick="logout()">Logout</button></div><div id="teacherContent"></div></div>
+<div class="dash" id="parentDash"><div class="top"><b id="parentTitle">Parent</b><button class="btn" style="width:auto;padding:8px 14px" onclick="logout()">Logout</button></div><div id="parentContent"></div></div>
 <script>
-// Fixed teacher loading - FAST
-const teachers = ["Mr. Okoro - Agric Science","Mrs. Blessing - Biology","Mr. Johnson - Chemistry","Mrs. Faith - Maths","Mr. David - English"];
-function loadTeachers(){
-const box = document.getElementById('teacherList');
-box.innerHTML = "";
-teachers.forEach(t=>{
-box.innerHTML += `<p>🌿 ${t}</p>`;
-});
+let STUDENTS=[], TEACHERS=[], ADMINS=[];
+async function loadExcel(){
+ try{
+  let url='./FRUITFUL_WISDOM_ACADEMY_PORTAL_TEMPLATE.xlsx';
+  let res=await fetch(url); if(!res.ok) throw 'not found';
+  let buf=await res.arrayBuffer(); let wb=XLSX.read(buf,{type:'array'});
+  STUDENTS=XLSX.utils.sheet_to_json(wb.Sheets['Students']);
+  TEACHERS=XLSX.utils.sheet_to_json(wb.Sheets['Teachers']);
+  ADMINS=XLSX.utils.sheet_to_json(wb.Sheets['Admin']);
+  document.getElementById('status').textContent=`Loaded: ${STUDENTS.length} Students, ${TEACHERS.length} Teachers`;
+  let sel=document.getElementById('teacherName'); TEACHERS.forEach(t=>{let o=document.createElement('option');o.value=t['Teacher Name'];o.textContent=t['Teacher Name']+' - '+t['Assignment'];sel.appendChild(o);});
+ }catch(e){document.getElementById('status').textContent='⚠️ Excel not found! Please upload FRUITFUL_WISDOM_ACADEMY_PORTAL_TEMPLATE.xlsx to GitHub root.'; document.getElementById('status').style.color='red';}
 }
-window.onload = function(){
-setTimeout(loadTeachers, 500);
-}
-function login(){
-const reg = document.getElementById('regNo').value;
-if(!reg){alert('Enter Reg No'); return;}
-alert('Welcome! Session 2024/2025 - Login successful for '+reg);
-}
-function checkResult(){
-alert('Result checking - Session 2024/2025');
-}
-</script>
-</body>
-</html>
+loadExcel();
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+function loginAdmin(){let u=document.getElementById('adminUser').value.trim(); let p=document.getElementById('adminPass').value.trim(); let f=ADMINS.find(a=>a['Username']==u && String(a['Password'])==p); if(!f){let e=document.getElementById('adminErr');e.style.display='block';e.textContent='Wrong! Use admin / FWA-Admin-2026!';return} closeModal('adminM');document.getElementById('adminDash').classList.add('active'); let h=`<div class="badge">${STUDENTS.length} Students</div><br><br><table class="table"><tr><th>ID</th><th>Name</th><th>Class</th><th>Pass</th></tr>`; STUDENTS.slice(0,100).forEach(s=>{h+=`<tr><td>${s['Student ID']}</td><td>${s['Student Name']}</td><td>${s['Class']}</td><td>${s['Parent Password']}</td></tr>`}); h+=`</table>`; document.getElementById('adminContent').innerHTML=h;}
+function loginTeacher(){let n=document.getElementById('teacherName').value; let p=document.getElementById('teacherPin').value.trim(); let f=TEACHERS.find(t=>t['Teacher Name']==n && String(t['Login PIN'])==p); if(!f){let e=document.getElementById('teacherErr');e.style.display='block';e.textContent='Wrong PIN';return} closeModal('teacherM');document.getElementById('teacherDash').classList.add('active'); document.getElementById('teacherTitle').textContent=n+' - '+f['Assignment']; let h=`<div class="badge">${f['Assignment']}</div><br><br><table class="table"><tr><th>ID</th><th>Name</th><th>Class</th></tr>`; STUDENTS.slice(0,50).forEach(s=>{h+=`<tr><td>${s['Student ID']}</td><td>${s['Student Name']}</td><td>${s['Class']}</td></tr>`}); h+=`</table>`; document.getElementById('teacherContent').innerHTML=h;}
+function loginParent(){let id=document.getElementById('parentId').value.trim(); let pass=document.getElementById('parentPass').value.trim(); let f=STUDENTS.find(s=>String(s['Student ID']).toLowerCase()==id.toLowerCase() && String(s['Parent Password'])==pass); if(!f){let e=document.getElementById('parentErr');e.style.display='block';e.textContent='Wrong ID/Pass. Try FWA-B05-001 / 7TEH83QO';return} closeModal('parentM');document.getElementById('parentDash').classList.add('active'); document.getElementById('parentTitle').textContent=f['Student Name']+' - '+f['Class']; let h=`<div style="background:#fff;padding:16px;border-radius:14px"><h3>${f['Student Name']}</h3><p>${f['Student ID']} | ${f['Class']}</p><br><table class="table"><tr><th>Subject</th><th>Total</th><th>Grade</th></tr><tr><td colspan="3" style="text-align:center;padding:20px;color:#888">No results yet - Teachers will enter in Results sheet</td></tr></table></div>`; document.getElementById('parentContent').innerHTML=h;}
+function logout(){document.querySelectorAll('.dash').forEach(d=>d.classList.remove('active'))}
+</script></body></html>
